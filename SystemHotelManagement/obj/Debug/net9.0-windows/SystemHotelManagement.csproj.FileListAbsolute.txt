@@ -138,3 +138,5 @@ D:\laptrinhweb\code_outsrc\SystemHotelManagement\SystemHotelManagement\SystemHot
 D:\laptrinhweb\code_outsrc\SystemHotelManagement\SystemHotelManagement\SystemHotelManagement\bin\Debug\net9.0-windows\runtimes\win\lib\net6.0\System.Runtime.Caching.dll
 D:\laptrinhweb\code_outsrc\SystemHotelManagement\SystemHotelManagement\SystemHotelManagement\obj\Debug\net9.0-windows\SystemHotelManagement.csproj.AssemblyReference.cache
 D:\laptrinhweb\code_outsrc\SystemHotelManagement\SystemHotelManagement\SystemHotelManagement\obj\Debug\net9.0-windows\SystemHo.748652B4.Up2Date
+D:\laptrinhweb\code_outsrc\SystemHotelManagement\SystemHotelManagement\SystemHotelManagement\obj\Debug\net9.0-windows\SystemHotelManagement.View.FrmDashboard.resources
+D:\laptrinhweb\code_outsrc\SystemHotelManagement\SystemHotelManagement\SystemHotelManagement\obj\Debug\net9.0-windows\SystemHotelManagement.sourcelink.json
