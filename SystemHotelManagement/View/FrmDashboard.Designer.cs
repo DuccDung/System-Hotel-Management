@@ -15,6 +15,14 @@
         private void InitializeComponent()
         {
             pnlLeftPlaceholder = new Panel();
+            flpLeftMenu = new FlowLayoutPanel();
+            btn1 = new Button();
+            btn2 = new Button();
+            btn3 = new Button();
+            btn4 = new Button();
+            btn5 = new Button();
+            btn6 = new Button();
+            btn7 = new Button();
             panel1 = new Panel();
             lbl_db = new Label();
             pnlRight = new Panel();
@@ -36,7 +44,10 @@
             pnlTopBar = new Panel();
             lblHotline = new Label();
             lblTitleTop = new Label();
+            pnlEmployees = new Panel();
+            button1 = new Button();
             pnlLeftPlaceholder.SuspendLayout();
+            flpLeftMenu.SuspendLayout();
             panel1.SuspendLayout();
             pnlRight.SuspendLayout();
             pnlContent.SuspendLayout();
@@ -48,12 +59,111 @@
             // pnlLeftPlaceholder
             // 
             pnlLeftPlaceholder.BackColor = Color.FromArgb(226, 232, 240);
+            pnlLeftPlaceholder.Controls.Add(flpLeftMenu);
             pnlLeftPlaceholder.Controls.Add(panel1);
             pnlLeftPlaceholder.Dock = DockStyle.Left;
             pnlLeftPlaceholder.Location = new Point(0, 0);
             pnlLeftPlaceholder.Name = "pnlLeftPlaceholder";
             pnlLeftPlaceholder.Size = new Size(250, 720);
             pnlLeftPlaceholder.TabIndex = 0;
+            // 
+            // flpLeftMenu
+            // 
+            flpLeftMenu.AutoScroll = true;
+            flpLeftMenu.BackColor = Color.FromArgb(226, 232, 240);
+            flpLeftMenu.Controls.Add(btn1);
+            flpLeftMenu.Controls.Add(btn2);
+            flpLeftMenu.Controls.Add(btn3);
+            flpLeftMenu.Controls.Add(btn4);
+            flpLeftMenu.Controls.Add(btn5);
+            flpLeftMenu.Controls.Add(btn6);
+            flpLeftMenu.Controls.Add(btn7);
+            flpLeftMenu.Controls.Add(button1);
+            flpLeftMenu.Dock = DockStyle.Fill;
+            flpLeftMenu.FlowDirection = FlowDirection.TopDown;
+            flpLeftMenu.Location = new Point(0, 56);
+            flpLeftMenu.Name = "flpLeftMenu";
+            flpLeftMenu.Padding = new Padding(10, 12, 10, 10);
+            flpLeftMenu.Size = new Size(250, 664);
+            flpLeftMenu.TabIndex = 1;
+            flpLeftMenu.WrapContents = false;
+            // 
+            // btn1
+            // 
+            btn1.Location = new Point(10, 12);
+            btn1.Margin = new Padding(0, 0, 0, 8);
+            btn1.Name = "btn1";
+            btn1.Padding = new Padding(14, 0, 0, 0);
+            btn1.Size = new Size(230, 42);
+            btn1.TabIndex = 0;
+            btn1.Text = "Quản lý";
+            btn1.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // btn2
+            // 
+            btn2.Location = new Point(10, 62);
+            btn2.Margin = new Padding(0, 0, 0, 8);
+            btn2.Name = "btn2";
+            btn2.Padding = new Padding(14, 0, 0, 0);
+            btn2.Size = new Size(230, 42);
+            btn2.TabIndex = 1;
+            btn2.Text = "Nhân viên";
+            btn2.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // btn3
+            // 
+            btn3.Location = new Point(10, 112);
+            btn3.Margin = new Padding(0, 0, 0, 8);
+            btn3.Name = "btn3";
+            btn3.Padding = new Padding(14, 0, 0, 0);
+            btn3.Size = new Size(230, 42);
+            btn3.TabIndex = 2;
+            btn3.Text = "Khách hàng";
+            btn3.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // btn4
+            // 
+            btn4.Location = new Point(10, 162);
+            btn4.Margin = new Padding(0, 0, 0, 8);
+            btn4.Name = "btn4";
+            btn4.Padding = new Padding(14, 0, 0, 0);
+            btn4.Size = new Size(230, 42);
+            btn4.TabIndex = 3;
+            btn4.Text = "Nhập hàng";
+            btn4.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // btn5
+            // 
+            btn5.Location = new Point(10, 212);
+            btn5.Margin = new Padding(0, 0, 0, 8);
+            btn5.Name = "btn5";
+            btn5.Padding = new Padding(14, 0, 0, 0);
+            btn5.Size = new Size(230, 42);
+            btn5.TabIndex = 4;
+            btn5.Text = "Phòng";
+            btn5.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // btn6
+            // 
+            btn6.Location = new Point(10, 262);
+            btn6.Margin = new Padding(0, 0, 0, 8);
+            btn6.Name = "btn6";
+            btn6.Padding = new Padding(14, 0, 0, 0);
+            btn6.Size = new Size(230, 42);
+            btn6.TabIndex = 5;
+            btn6.Text = "Loại phòng";
+            btn6.TextAlign = ContentAlignment.MiddleLeft;
+            // 
+            // btn7
+            // 
+            btn7.Location = new Point(10, 312);
+            btn7.Margin = new Padding(0, 0, 0, 8);
+            btn7.Name = "btn7";
+            btn7.Padding = new Padding(14, 0, 0, 0);
+            btn7.Size = new Size(230, 42);
+            btn7.TabIndex = 6;
+            btn7.Text = "Lương nhân viên";
+            btn7.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // panel1
             // 
@@ -80,6 +190,7 @@
             // pnlRight
             // 
             pnlRight.BackColor = Color.White;
+            pnlRight.Controls.Add(pnlEmployees);
             pnlRight.Controls.Add(pnlContent);
             pnlRight.Controls.Add(pnlTopBar);
             pnlRight.Dock = DockStyle.Fill;
@@ -314,6 +425,27 @@
             lblTitleTop.TabIndex = 0;
             lblTitleTop.Text = "Sơ đồ phòng";
             // 
+            // pnlEmployees
+            // 
+            pnlEmployees.BackColor = Color.FromArgb(248, 250, 252);
+            pnlEmployees.Dock = DockStyle.Fill;
+            pnlEmployees.Location = new Point(0, 56);
+            pnlEmployees.Name = "pnlEmployees";
+            pnlEmployees.Size = new Size(1030, 664);
+            pnlEmployees.TabIndex = 2;
+            pnlEmployees.Visible = false;
+            // 
+            // button1
+            // 
+            button1.Location = new Point(10, 362);
+            button1.Margin = new Padding(0, 0, 0, 8);
+            button1.Name = "button1";
+            button1.Padding = new Padding(14, 0, 0, 0);
+            button1.Size = new Size(230, 42);
+            button1.TabIndex = 7;
+            button1.Text = "Doanh thu/lợi nhuận";
+            button1.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // FrmDashboard
             // 
             AutoScaleDimensions = new SizeF(9F, 23F);
@@ -326,6 +458,7 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Dashboard - SystemHotelManagement";
             pnlLeftPlaceholder.ResumeLayout(false);
+            flpLeftMenu.ResumeLayout(false);
             panel1.ResumeLayout(false);
             pnlRight.ResumeLayout(false);
             pnlContent.ResumeLayout(false);
@@ -337,125 +470,6 @@
             pnlTopBar.PerformLayout();
             ResumeLayout(false);
 
-
-            // ===== LEFT MENU UI ONLY =====
-            flpLeftMenu = new FlowLayoutPanel();
-            btn1 = new Button();
-            btn2 = new Button();
-            btn3 = new Button();
-            btn4 = new Button();
-            btn5 = new Button();
-            btn6 = new Button();
-            btn7 = new Button();
-            btn8 = new Button();
-            btn9 = new Button();
-            btn10 = new Button();
-
-            // flpLeftMenu
-            flpLeftMenu.Dock = DockStyle.Fill;
-            flpLeftMenu.FlowDirection = FlowDirection.TopDown;
-            flpLeftMenu.WrapContents = false;
-            flpLeftMenu.AutoScroll = true;
-            flpLeftMenu.Padding = new Padding(10, 12, 10, 10);
-            flpLeftMenu.BackColor = Color.FromArgb(226, 232, 240);
-
-            // btn1
-            btn1.Name = "btn1";
-            btn1.Text = "Button 1";
-            btn1.Size = new Size(230, 42);
-            btn1.Margin = new Padding(0, 0, 0, 8);
-            btn1.TextAlign = ContentAlignment.MiddleLeft;
-            btn1.Padding = new Padding(14, 0, 0, 0);
-
-            // btn2
-            btn2.Name = "btn2";
-            btn2.Text = "Button 2";
-            btn2.Size = new Size(230, 42);
-            btn2.Margin = new Padding(0, 0, 0, 8);
-            btn2.TextAlign = ContentAlignment.MiddleLeft;
-            btn2.Padding = new Padding(14, 0, 0, 0);
-
-            // btn3
-            btn3.Name = "btn3";
-            btn3.Text = "Button 3";
-            btn3.Size = new Size(230, 42);
-            btn3.Margin = new Padding(0, 0, 0, 8);
-            btn3.TextAlign = ContentAlignment.MiddleLeft;
-            btn3.Padding = new Padding(14, 0, 0, 0);
-
-            // btn4
-            btn4.Name = "btn4";
-            btn4.Text = "Button 4";
-            btn4.Size = new Size(230, 42);
-            btn4.Margin = new Padding(0, 0, 0, 8);
-            btn4.TextAlign = ContentAlignment.MiddleLeft;
-            btn4.Padding = new Padding(14, 0, 0, 0);
-
-            // btn5
-            btn5.Name = "btn5";
-            btn5.Text = "Button 5";
-            btn5.Size = new Size(230, 42);
-            btn5.Margin = new Padding(0, 0, 0, 8);
-            btn5.TextAlign = ContentAlignment.MiddleLeft;
-            btn5.Padding = new Padding(14, 0, 0, 0);
-
-            // btn6
-            btn6.Name = "btn6";
-            btn6.Text = "Button 6";
-            btn6.Size = new Size(230, 42);
-            btn6.Margin = new Padding(0, 0, 0, 8);
-            btn6.TextAlign = ContentAlignment.MiddleLeft;
-            btn6.Padding = new Padding(14, 0, 0, 0);
-
-            // btn7
-            btn7.Name = "btn7";
-            btn7.Text = "Button 7";
-            btn7.Size = new Size(230, 42);
-            btn7.Margin = new Padding(0, 0, 0, 8);
-            btn7.TextAlign = ContentAlignment.MiddleLeft;
-            btn7.Padding = new Padding(14, 0, 0, 0);
-
-            // btn8
-            btn8.Name = "btn8";
-            btn8.Text = "Button 8";
-            btn8.Size = new Size(230, 42);
-            btn8.Margin = new Padding(0, 0, 0, 8);
-            btn8.TextAlign = ContentAlignment.MiddleLeft;
-            btn8.Padding = new Padding(14, 0, 0, 0);
-
-            // btn9
-            btn9.Name = "btn9";
-            btn9.Text = "Button 9";
-            btn9.Size = new Size(230, 42);
-            btn9.Margin = new Padding(0, 0, 0, 8);
-            btn9.TextAlign = ContentAlignment.MiddleLeft;
-            btn9.Padding = new Padding(14, 0, 0, 0);
-
-            // btn10
-            btn10.Name = "btn10";
-            btn10.Text = "Button 10";
-            btn10.Size = new Size(230, 42);
-            btn10.Margin = new Padding(0, 0, 0, 8);
-            btn10.TextAlign = ContentAlignment.MiddleLeft;
-            btn10.Padding = new Padding(14, 0, 0, 0);
-
-            // add buttons to flp
-            flpLeftMenu.Controls.Add(btn1);
-            flpLeftMenu.Controls.Add(btn2);
-            flpLeftMenu.Controls.Add(btn3);
-            flpLeftMenu.Controls.Add(btn4);
-            flpLeftMenu.Controls.Add(btn5);
-            flpLeftMenu.Controls.Add(btn6);
-            flpLeftMenu.Controls.Add(btn7);
-            flpLeftMenu.Controls.Add(btn8);
-            flpLeftMenu.Controls.Add(btn9);
-            flpLeftMenu.Controls.Add(btn10);
-
-            // add menu to left placeholder (below header panel1)
-            pnlLeftPlaceholder.Controls.Add(flpLeftMenu);
-            pnlLeftPlaceholder.Controls.SetChildIndex(flpLeftMenu, 0);
-
-
         }
 
         #endregion
@@ -463,6 +477,8 @@
         // ===== Fields (KHAI BÁO ĐẦY ĐỦ - không đỏ) =====
         private System.Windows.Forms.Panel pnlLeftPlaceholder;
         private System.Windows.Forms.Panel pnlRight;
+        private Panel pnlEmployees;
+
 
         private System.Windows.Forms.Panel pnlTopBar;
         private System.Windows.Forms.Label lblHotline;
@@ -491,9 +507,6 @@
         private Button btn5;
         private Button btn6;
         private Button btn7;
-        private Button btn8;
-        private Button btn9;
-        private Button btn10;
 
         private FlowLayoutPanel flpLeftMenu;
 
@@ -503,5 +516,6 @@
         private System.Windows.Forms.FlowLayoutPanel flpRooms;
         private Panel panel1;
         private Label lbl_db;
+        private Button button1;
     }
 }

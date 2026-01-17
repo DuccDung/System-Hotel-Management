@@ -13,6 +13,7 @@ namespace SystemHotelManagement.View
     public partial class FrmDashboard : Form
     {
         private Button? _activeMenuButton;
+        private Form? _activeChildForm;
         private readonly Color _menuBg = Color.White;
         private readonly Color _menuFg = Color.FromArgb(15, 23, 42);
         private readonly Color _menuBorder = Color.FromArgb(203, 213, 225);
@@ -35,7 +36,7 @@ namespace SystemHotelManagement.View
         private void InitLeftMenu()
         {
             // style chung cho 10 nút (đây là logic, nằm ở code.cs)
-            var buttons = new[] { btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10 };
+            var buttons = new[] { btn1, btn2, btn3, btn4, btn5, btn6, btn7 };
             foreach (var b in buttons)
             {
                 b.FlatStyle = FlatStyle.Flat;
@@ -52,10 +53,38 @@ namespace SystemHotelManagement.View
             SetActiveMenu(btn1);
         }
 
+        //private void MenuButton_Click(object? sender, EventArgs e)
+        //{
+        //    if (sender is not Button b) return;
+
+        //    SetActiveMenu(b);
+
+        //    if (b == btn1) ShowView("dashboard");
+        //    else if (b == btn2) ShowView("employees");
+        //    // btn3... btn7 sau này bạn thêm tiếp
+        //}
         private void MenuButton_Click(object? sender, EventArgs e)
         {
-            if (sender is Button b)
-                SetActiveMenu(b);
+            if (sender is not Button b) return;
+
+            SetActiveMenu(b);
+
+            if (b == btn1)
+            {
+                var dashboard = new FrmDashboard();
+                dashboard.Show();
+                this.Hide();
+            }
+            else if (b == btn2)
+            {
+                lblTitleTop.Text = "Quản lý nhân viên";
+                OpenChildForm(new FrmEmployees());
+            }
+            else if (b == btn3)
+            {
+                lblTitleTop.Text = "Danh sách khách hàng";
+                OpenChildForm(new FrmCustomersRanking());
+            }
         }
 
         private void SetActiveMenu(Button b)
@@ -427,7 +456,46 @@ namespace SystemHotelManagement.View
             public string RoomType { get; }
             public RoomState State { get; }
         }
+        private void ShowView(string view)
+        {
+            // ẩn tất cả view
+            pnlContent.Visible = false;      // dashboard
+            pnlEmployees.Visible = false;    // employees
 
+            switch (view)
+            {
+                case "dashboard":
+                    pnlContent.Visible = true;
+                    lblTitleTop.Text = "Sơ đồ phòng";
+                    break;
+
+                case "employees":
+                    pnlEmployees.Visible = true;
+                    lblTitleTop.Text = "Quản lý nhân viên";
+                    break;
+            }
+        }
+        private void OpenChildForm(Form child)
+        {
+            if (_activeChildForm != null)
+            {
+                _activeChildForm.Close();
+                _activeChildForm.Dispose();
+            }
+
+            _activeChildForm = child;
+
+            // Xóa dashboard controls để nhét form con
+            pnlContent.Controls.Clear();
+
+            child.TopLevel = false;
+            child.FormBorderStyle = FormBorderStyle.None;
+            child.Dock = DockStyle.Fill;
+
+            pnlContent.Controls.Add(child);
+            pnlContent.Tag = child;
+            child.Show();
+        }
         private void lbl_db_Click(object sender, EventArgs e)
         {
 
