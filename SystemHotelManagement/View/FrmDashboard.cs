@@ -36,7 +36,7 @@ namespace SystemHotelManagement.View
         private void InitLeftMenu()
         {
             // style chung cho 10 nút (đây là logic, nằm ở code.cs)
-            var buttons = new[] { btn1, btn2, btn3, btn4, btn5, btn6, btn7 , btn8};
+            var buttons = new[] { btn1, btn2, btn3, btn4, btn5, btn6, btn7 , btn8 , btn9};
             foreach (var b in buttons)
             {
                 b.FlatStyle = FlatStyle.Flat;
@@ -101,6 +101,22 @@ namespace SystemHotelManagement.View
                 lblTitleTop.Text = "Danh sách loại phòng";
                 OpenChildForm(new FrmRoomTypes());
             }
+            else if (b == btn7)
+            {
+                lblTitleTop.Text = "Chấm công nhân viên";
+                OpenChildForm(new FrmAttendanceDaily());
+            }
+            else if (b == btn8)
+            {
+                lblTitleTop.Text = "Tính lương nhân viên";
+                OpenChildForm(new FrmSalaryReport());
+            }
+            else if (b == btn9)
+            {
+                lblTitleTop.Text = "Doanh thu / Lợi nhuận";
+                OpenChildForm(new FrmRevenueProfitReport());
+            }
+
         }
 
         private void SetActiveMenu(Button b)

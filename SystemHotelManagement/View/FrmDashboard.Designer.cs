@@ -46,6 +46,7 @@
             pnlTopBar = new Panel();
             lblHotline = new Label();
             lblTitleTop = new Label();
+            btn9 = new Button();
             pnlLeftPlaceholder.SuspendLayout();
             flpLeftMenu.SuspendLayout();
             panel1.SuspendLayout();
@@ -79,6 +80,7 @@
             flpLeftMenu.Controls.Add(btn6);
             flpLeftMenu.Controls.Add(btn7);
             flpLeftMenu.Controls.Add(btn8);
+            flpLeftMenu.Controls.Add(btn9);
             flpLeftMenu.Dock = DockStyle.Fill;
             flpLeftMenu.FlowDirection = FlowDirection.TopDown;
             flpLeftMenu.Location = new Point(0, 56);
@@ -162,7 +164,7 @@
             btn7.Padding = new Padding(14, 0, 0, 0);
             btn7.Size = new Size(230, 42);
             btn7.TabIndex = 6;
-            btn7.Text = "Lương nhân viên";
+            btn7.Text = "Chấm công nhân viên";
             btn7.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // btn8
@@ -173,7 +175,7 @@
             btn8.Padding = new Padding(14, 0, 0, 0);
             btn8.Size = new Size(230, 42);
             btn8.TabIndex = 7;
-            btn8.Text = "Doanh thu/lợi nhuận";
+            btn8.Text = "Tính lương nhân viên";
             btn8.TextAlign = ContentAlignment.MiddleLeft;
             // 
             // panel1
@@ -446,6 +448,17 @@
             lblTitleTop.TabIndex = 0;
             lblTitleTop.Text = "Sơ đồ phòng";
             // 
+            // btn9
+            // 
+            btn9.Location = new Point(10, 412);
+            btn9.Margin = new Padding(0, 0, 0, 8);
+            btn9.Name = "btn9";
+            btn9.Padding = new Padding(14, 0, 0, 0);
+            btn9.Size = new Size(230, 42);
+            btn9.TabIndex = 8;
+            btn9.Text = "Doanh thu/lợi nhuận";
+            btn9.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // FrmDashboard
             // 
             AutoScaleDimensions = new SizeF(9F, 23F);
@@ -517,5 +530,6 @@
         private Panel panel1;
         private Label lbl_db;
         private Button btn8;
+        private Button btn9;
     }
 }

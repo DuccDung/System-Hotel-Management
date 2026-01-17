@@ -38,6 +38,12 @@ public partial class SystemHotelManagementContext : DbContext
     public virtual DbSet<ServiceUsage> ServiceUsages { get; set; }
     public virtual DbSet<StockImport> StockImports { get; set; }
     public virtual DbSet<StockImportItem> StockImportItems { get; set; }
+    public virtual DbSet<EmployeeHourlyRate> EmployeeHourlyRates { get; set; }
+    public virtual DbSet<EmployeeHourlyRateOverride> EmployeeHourlyRateOverrides { get; set; }
+    public virtual DbSet<Attendance> Attendances { get; set; }
+
+    public virtual DbSet<PayRun> PayRuns { get; set; }
+    public virtual DbSet<PayRunDetail> PayRunDetails { get; set; }
 
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -45,6 +51,53 @@ public partial class SystemHotelManagementContext : DbContext
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<EmployeeHourlyRate>(entity =>
+        {
+            entity.HasKey(e => e.RateId);
+            entity.ToTable("EmployeeHourlyRates");
+            entity.Property(e => e.Role).HasMaxLength(100);
+            entity.Property(e => e.HourlyRate).HasColumnType("decimal(18,2)");
+            entity.Property(e => e.UpdatedAt).HasColumnType("datetime2");
+        });
+
+        modelBuilder.Entity<EmployeeHourlyRateOverride>(entity =>
+        {
+            entity.HasKey(e => e.OverrideId);
+            entity.ToTable("EmployeeHourlyRateOverrides");
+            entity.Property(e => e.HourlyRate).HasColumnType("decimal(18,2)");
+            entity.Property(e => e.UpdatedAt).HasColumnType("datetime2");
+
+            entity.HasOne(d => d.Employee)
+                .WithMany()
+                .HasForeignKey(d => d.EmployeeId)
+                .HasConstraintName("FK_EHRO_Employees");
+        });
+
+        modelBuilder.Entity<Attendance>(entity =>
+        {
+            entity.HasKey(e => e.AttendanceId);
+            entity.ToTable("Attendances");
+
+            entity.Property(e => e.WorkDate).HasColumnType("date");
+            entity.Property(e => e.WorkHours).HasColumnType("decimal(5,2)");
+            entity.Property(e => e.Note).HasMaxLength(300);
+            entity.Property(e => e.MarkedAt).HasColumnType("datetime2");
+
+            entity.HasIndex(e => new { e.EmployeeId, e.WorkDate })
+                .IsUnique()
+                .HasDatabaseName("UX_Attendances_Employee_WorkDate");
+
+            entity.HasOne(d => d.Employee)
+                .WithMany()
+                .HasForeignKey(d => d.EmployeeId)
+                .HasConstraintName("FK_Attendances_Employees");
+
+            entity.HasOne(d => d.MarkedByNavigation)
+                .WithMany()
+                .HasForeignKey(d => d.MarkedBy)
+                .HasConstraintName("FK_Attendances_MarkedBy");
+        });
+
         modelBuilder.Entity<StockImport>(entity =>
         {
             entity.HasKey(e => e.ImportId);
