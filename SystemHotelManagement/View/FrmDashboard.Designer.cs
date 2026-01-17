@@ -23,9 +23,11 @@
             btn5 = new Button();
             btn6 = new Button();
             btn7 = new Button();
+            btn8 = new Button();
             panel1 = new Panel();
             lbl_db = new Label();
             pnlRight = new Panel();
+            pnlEmployees = new Panel();
             pnlContent = new Panel();
             flpRooms = new FlowLayoutPanel();
             lblHint = new Label();
@@ -44,8 +46,6 @@
             pnlTopBar = new Panel();
             lblHotline = new Label();
             lblTitleTop = new Label();
-            pnlEmployees = new Panel();
-            button1 = new Button();
             pnlLeftPlaceholder.SuspendLayout();
             flpLeftMenu.SuspendLayout();
             panel1.SuspendLayout();
@@ -78,7 +78,7 @@
             flpLeftMenu.Controls.Add(btn5);
             flpLeftMenu.Controls.Add(btn6);
             flpLeftMenu.Controls.Add(btn7);
-            flpLeftMenu.Controls.Add(button1);
+            flpLeftMenu.Controls.Add(btn8);
             flpLeftMenu.Dock = DockStyle.Fill;
             flpLeftMenu.FlowDirection = FlowDirection.TopDown;
             flpLeftMenu.Location = new Point(0, 56);
@@ -165,6 +165,17 @@
             btn7.Text = "Lương nhân viên";
             btn7.TextAlign = ContentAlignment.MiddleLeft;
             // 
+            // btn8
+            // 
+            btn8.Location = new Point(10, 362);
+            btn8.Margin = new Padding(0, 0, 0, 8);
+            btn8.Name = "btn8";
+            btn8.Padding = new Padding(14, 0, 0, 0);
+            btn8.Size = new Size(230, 42);
+            btn8.TabIndex = 7;
+            btn8.Text = "Doanh thu/lợi nhuận";
+            btn8.TextAlign = ContentAlignment.MiddleLeft;
+            // 
             // panel1
             // 
             panel1.Controls.Add(lbl_db);
@@ -198,6 +209,16 @@
             pnlRight.Name = "pnlRight";
             pnlRight.Size = new Size(1030, 720);
             pnlRight.TabIndex = 1;
+            // 
+            // pnlEmployees
+            // 
+            pnlEmployees.BackColor = Color.FromArgb(248, 250, 252);
+            pnlEmployees.Dock = DockStyle.Fill;
+            pnlEmployees.Location = new Point(0, 56);
+            pnlEmployees.Name = "pnlEmployees";
+            pnlEmployees.Size = new Size(1030, 664);
+            pnlEmployees.TabIndex = 2;
+            pnlEmployees.Visible = false;
             // 
             // pnlContent
             // 
@@ -425,27 +446,6 @@
             lblTitleTop.TabIndex = 0;
             lblTitleTop.Text = "Sơ đồ phòng";
             // 
-            // pnlEmployees
-            // 
-            pnlEmployees.BackColor = Color.FromArgb(248, 250, 252);
-            pnlEmployees.Dock = DockStyle.Fill;
-            pnlEmployees.Location = new Point(0, 56);
-            pnlEmployees.Name = "pnlEmployees";
-            pnlEmployees.Size = new Size(1030, 664);
-            pnlEmployees.TabIndex = 2;
-            pnlEmployees.Visible = false;
-            // 
-            // button1
-            // 
-            button1.Location = new Point(10, 362);
-            button1.Margin = new Padding(0, 0, 0, 8);
-            button1.Name = "button1";
-            button1.Padding = new Padding(14, 0, 0, 0);
-            button1.Size = new Size(230, 42);
-            button1.TabIndex = 7;
-            button1.Text = "Doanh thu/lợi nhuận";
-            button1.TextAlign = ContentAlignment.MiddleLeft;
-            // 
             // FrmDashboard
             // 
             AutoScaleDimensions = new SizeF(9F, 23F);
@@ -516,6 +516,6 @@
         private System.Windows.Forms.FlowLayoutPanel flpRooms;
         private Panel panel1;
         private Label lbl_db;
-        private Button button1;
+        private Button btn8;
     }
 }

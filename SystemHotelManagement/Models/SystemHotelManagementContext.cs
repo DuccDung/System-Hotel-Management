@@ -36,12 +36,58 @@ public partial class SystemHotelManagementContext : DbContext
     public virtual DbSet<Service> Services { get; set; }
 
     public virtual DbSet<ServiceUsage> ServiceUsages { get; set; }
+    public virtual DbSet<StockImport> StockImports { get; set; }
+    public virtual DbSet<StockImportItem> StockImportItems { get; set; }
+
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         => optionsBuilder.UseSqlServer("Data Source=ADMIN-PC\\MSSQLSERVER1;Initial Catalog=SystemHotelManagement;User ID=sa;Password=Dung@123;Trust Server Certificate=True");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
+        modelBuilder.Entity<StockImport>(entity =>
+        {
+            entity.HasKey(e => e.ImportId);
+
+            entity.ToTable("StockImports");
+
+            entity.Property(e => e.ImportDate).HasColumnType("datetime2");
+            entity.Property(e => e.SupplierName).HasMaxLength(200);
+            entity.Property(e => e.SupplierPhone).HasMaxLength(30);
+            entity.Property(e => e.SupplierEmail).HasMaxLength(200);
+            entity.Property(e => e.SupplierAddress).HasMaxLength(300);
+            entity.Property(e => e.Note).HasMaxLength(500);
+            entity.Property(e => e.TotalAmount).HasColumnType("decimal(18,2)");
+            entity.Property(e => e.CreatedAt).HasColumnType("datetime2");
+
+            entity.HasOne(d => d.Employee)
+                .WithMany() 
+                .HasForeignKey(d => d.EmployeeId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .HasConstraintName("FK_StockImports_Employees");
+        });
+
+        modelBuilder.Entity<StockImportItem>(entity =>
+        {
+            entity.HasKey(e => e.ImportItemId);
+
+            entity.ToTable("StockImportItems");
+
+            entity.Property(e => e.ItemName).HasMaxLength(200);
+            entity.Property(e => e.Unit).HasMaxLength(50);
+            entity.Property(e => e.UnitPrice).HasColumnType("decimal(18,2)");
+
+            entity.Property(e => e.LineTotal)
+                .HasColumnType("decimal(18,2)")
+                .ValueGeneratedOnAddOrUpdate();
+
+            entity.HasOne(d => d.Import)
+                .WithMany(p => p.StockImportItems)
+                .HasForeignKey(d => d.ImportId)
+                .OnDelete(DeleteBehavior.Cascade)
+                .HasConstraintName("FK_StockImportItems_StockImports");
+        });
+
         modelBuilder.Entity<Account>(entity =>
         {
             entity.HasKey(e => e.AccountId).HasName("PK__Accounts__349DA5A68E0E18A4");

@@ -144,3 +144,6 @@ D:\laptrinhweb\code_outsrc\SystemHotelManagement\SystemHotelManagement\SystemHot
 D:\laptrinhweb\code_outsrc\SystemHotelManagement\SystemHotelManagement\SystemHotelManagement\obj\Debug\net9.0-windows\SystemHotelManagement.View.Popup.FrmPaymentCheckoutPopup.resources
 D:\laptrinhweb\code_outsrc\SystemHotelManagement\SystemHotelManagement\SystemHotelManagement\obj\Debug\net9.0-windows\SystemHotelManagement.View.FrmEmployees.resources
 D:\laptrinhweb\code_outsrc\SystemHotelManagement\SystemHotelManagement\SystemHotelManagement\obj\Debug\net9.0-windows\SystemHotelManagement.View.FrmCustomersRanking.resources
+D:\laptrinhweb\code_outsrc\SystemHotelManagement\SystemHotelManagement\SystemHotelManagement\obj\Debug\net9.0-windows\SystemHotelManagement.View.FrmStockImport.resources
+D:\laptrinhweb\code_outsrc\SystemHotelManagement\SystemHotelManagement\SystemHotelManagement\obj\Debug\net9.0-windows\SystemHotelManagement.View.FrmRooms.resources
+D:\laptrinhweb\code_outsrc\SystemHotelManagement\SystemHotelManagement\SystemHotelManagement\obj\Debug\net9.0-windows\SystemHotelManagement.View.FrmRoomTypes.resources
