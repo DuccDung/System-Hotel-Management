@@ -337,6 +337,125 @@
             pnlTopBar.PerformLayout();
             ResumeLayout(false);
 
+
+            // ===== LEFT MENU UI ONLY =====
+            flpLeftMenu = new FlowLayoutPanel();
+            btn1 = new Button();
+            btn2 = new Button();
+            btn3 = new Button();
+            btn4 = new Button();
+            btn5 = new Button();
+            btn6 = new Button();
+            btn7 = new Button();
+            btn8 = new Button();
+            btn9 = new Button();
+            btn10 = new Button();
+
+            // flpLeftMenu
+            flpLeftMenu.Dock = DockStyle.Fill;
+            flpLeftMenu.FlowDirection = FlowDirection.TopDown;
+            flpLeftMenu.WrapContents = false;
+            flpLeftMenu.AutoScroll = true;
+            flpLeftMenu.Padding = new Padding(10, 12, 10, 10);
+            flpLeftMenu.BackColor = Color.FromArgb(226, 232, 240);
+
+            // btn1
+            btn1.Name = "btn1";
+            btn1.Text = "Button 1";
+            btn1.Size = new Size(230, 42);
+            btn1.Margin = new Padding(0, 0, 0, 8);
+            btn1.TextAlign = ContentAlignment.MiddleLeft;
+            btn1.Padding = new Padding(14, 0, 0, 0);
+
+            // btn2
+            btn2.Name = "btn2";
+            btn2.Text = "Button 2";
+            btn2.Size = new Size(230, 42);
+            btn2.Margin = new Padding(0, 0, 0, 8);
+            btn2.TextAlign = ContentAlignment.MiddleLeft;
+            btn2.Padding = new Padding(14, 0, 0, 0);
+
+            // btn3
+            btn3.Name = "btn3";
+            btn3.Text = "Button 3";
+            btn3.Size = new Size(230, 42);
+            btn3.Margin = new Padding(0, 0, 0, 8);
+            btn3.TextAlign = ContentAlignment.MiddleLeft;
+            btn3.Padding = new Padding(14, 0, 0, 0);
+
+            // btn4
+            btn4.Name = "btn4";
+            btn4.Text = "Button 4";
+            btn4.Size = new Size(230, 42);
+            btn4.Margin = new Padding(0, 0, 0, 8);
+            btn4.TextAlign = ContentAlignment.MiddleLeft;
+            btn4.Padding = new Padding(14, 0, 0, 0);
+
+            // btn5
+            btn5.Name = "btn5";
+            btn5.Text = "Button 5";
+            btn5.Size = new Size(230, 42);
+            btn5.Margin = new Padding(0, 0, 0, 8);
+            btn5.TextAlign = ContentAlignment.MiddleLeft;
+            btn5.Padding = new Padding(14, 0, 0, 0);
+
+            // btn6
+            btn6.Name = "btn6";
+            btn6.Text = "Button 6";
+            btn6.Size = new Size(230, 42);
+            btn6.Margin = new Padding(0, 0, 0, 8);
+            btn6.TextAlign = ContentAlignment.MiddleLeft;
+            btn6.Padding = new Padding(14, 0, 0, 0);
+
+            // btn7
+            btn7.Name = "btn7";
+            btn7.Text = "Button 7";
+            btn7.Size = new Size(230, 42);
+            btn7.Margin = new Padding(0, 0, 0, 8);
+            btn7.TextAlign = ContentAlignment.MiddleLeft;
+            btn7.Padding = new Padding(14, 0, 0, 0);
+
+            // btn8
+            btn8.Name = "btn8";
+            btn8.Text = "Button 8";
+            btn8.Size = new Size(230, 42);
+            btn8.Margin = new Padding(0, 0, 0, 8);
+            btn8.TextAlign = ContentAlignment.MiddleLeft;
+            btn8.Padding = new Padding(14, 0, 0, 0);
+
+            // btn9
+            btn9.Name = "btn9";
+            btn9.Text = "Button 9";
+            btn9.Size = new Size(230, 42);
+            btn9.Margin = new Padding(0, 0, 0, 8);
+            btn9.TextAlign = ContentAlignment.MiddleLeft;
+            btn9.Padding = new Padding(14, 0, 0, 0);
+
+            // btn10
+            btn10.Name = "btn10";
+            btn10.Text = "Button 10";
+            btn10.Size = new Size(230, 42);
+            btn10.Margin = new Padding(0, 0, 0, 8);
+            btn10.TextAlign = ContentAlignment.MiddleLeft;
+            btn10.Padding = new Padding(14, 0, 0, 0);
+
+            // add buttons to flp
+            flpLeftMenu.Controls.Add(btn1);
+            flpLeftMenu.Controls.Add(btn2);
+            flpLeftMenu.Controls.Add(btn3);
+            flpLeftMenu.Controls.Add(btn4);
+            flpLeftMenu.Controls.Add(btn5);
+            flpLeftMenu.Controls.Add(btn6);
+            flpLeftMenu.Controls.Add(btn7);
+            flpLeftMenu.Controls.Add(btn8);
+            flpLeftMenu.Controls.Add(btn9);
+            flpLeftMenu.Controls.Add(btn10);
+
+            // add menu to left placeholder (below header panel1)
+            pnlLeftPlaceholder.Controls.Add(flpLeftMenu);
+            pnlLeftPlaceholder.Controls.SetChildIndex(flpLeftMenu, 0);
+
+
         }
 
         #endregion
@@ -364,6 +483,21 @@
         private System.Windows.Forms.Button btnClean;
         private System.Windows.Forms.Button btnReserved;
         private System.Windows.Forms.Button btnRepair;
+
+        private Button btn1;
+        private Button btn2;
+        private Button btn3;
+        private Button btn4;
+        private Button btn5;
+        private Button btn6;
+        private Button btn7;
+        private Button btn8;
+        private Button btn9;
+        private Button btn10;
+
+        private FlowLayoutPanel flpLeftMenu;
+
+
 
         private System.Windows.Forms.Label lblHint;
         private System.Windows.Forms.FlowLayoutPanel flpRooms;

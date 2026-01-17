@@ -9,6 +9,14 @@ namespace SystemHotelManagement.View
 {
     public partial class FrmDashboard : Form
     {
+        private Button? _activeMenuButton;
+        private readonly Color _menuBg = Color.White;
+        private readonly Color _menuFg = Color.FromArgb(15, 23, 42);
+        private readonly Color _menuBorder = Color.FromArgb(203, 213, 225);
+
+        private readonly Color _activeBg = Color.FromArgb(219, 234, 254);
+        private readonly Color _activeFg = Color.FromArgb(15, 98, 254);
+        private readonly Color _activeBorder = Color.FromArgb(15, 98, 254);
         // ===== Demo data =====
         private readonly List<RoomCardModel> _allRooms = new();
 
@@ -18,8 +26,51 @@ namespace SystemHotelManagement.View
             InitUiRuntime();
             SeedDemoData();
             ApplyFilterAndRender();
+            InitLeftMenu();
         }
 
+        private void InitLeftMenu()
+        {
+            // style chung cho 10 nút (đây là logic, nằm ở code.cs)
+            var buttons = new[] { btn1, btn2, btn3, btn4, btn5, btn6, btn7, btn8, btn9, btn10 };
+            foreach (var b in buttons)
+            {
+                b.FlatStyle = FlatStyle.Flat;
+                b.FlatAppearance.BorderSize = 1;
+                b.FlatAppearance.BorderColor = _menuBorder;
+                b.BackColor = _menuBg;
+                b.ForeColor = _menuFg;
+                b.Font = new Font("Segoe UI", 10F, FontStyle.Regular);
+
+                b.Click += MenuButton_Click;
+            }
+
+            // active mặc định
+            SetActiveMenu(btn1);
+        }
+
+        private void MenuButton_Click(object? sender, EventArgs e)
+        {
+            if (sender is Button b)
+                SetActiveMenu(b);
+        }
+
+        private void SetActiveMenu(Button b)
+        {
+            if (_activeMenuButton != null)
+            {
+                _activeMenuButton.BackColor = _menuBg;
+                _activeMenuButton.ForeColor = _menuFg;
+                _activeMenuButton.FlatAppearance.BorderColor = _menuBorder;
+                _activeMenuButton.Font = new Font(_activeMenuButton.Font, FontStyle.Regular);
+            }
+
+            _activeMenuButton = b;
+            _activeMenuButton.BackColor = _activeBg;
+            _activeMenuButton.ForeColor = _activeFg;
+            _activeMenuButton.FlatAppearance.BorderColor = _activeBorder;
+            _activeMenuButton.Font = new Font(_activeMenuButton.Font, FontStyle.Bold);
+        }
         private void InitUiRuntime()
         {
             // Combo default
