@@ -13,7 +13,7 @@ public partial class Booking
 
     public DateTime CheckInPlan { get; set; }
 
-    public DateTime CheckOutPlan { get; set; }
+    public DateTime? CheckOutPlan { get; set; }
 
     public DateTime? CheckInAt { get; set; }
 

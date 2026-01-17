@@ -8,7 +8,7 @@ namespace SystemHotelManagement
         static void Main()
         {
             ApplicationConfiguration.Initialize();
-            Application.Run(new FrmDashboard());
+            Application.Run(new FrmLogin());
         }
     }
 }

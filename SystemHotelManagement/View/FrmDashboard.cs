@@ -1,9 +1,12 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
+using SystemHotelManagement.Models;
+using SystemHotelManagement.View.Popup;
 
 namespace SystemHotelManagement.View
 {
@@ -250,11 +253,12 @@ namespace SystemHotelManagement.View
 
             void ClickAny()
             {
-                MessageBox.Show(
-                    $"Phòng: {m.RoomCode}\nLoại: {m.RoomType}\nTrạng thái: {m.State}\nMã: {m.Tag1}",
-                    "Chi tiết phòng",
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                //MessageBox.Show(
+                //    $"Phòng: {m.RoomCode}\nLoại: {m.RoomType}\nTrạng thái: {m.State}\nMã: {m.Tag1}",
+                //    "Chi tiết phòng",
+                //    MessageBoxButtons.OK,
+                //    MessageBoxIcon.Information);
+                HandleRoomCardClick(m);
             }
 
             panel.Click += (_, __) => ClickAny();
@@ -262,6 +266,38 @@ namespace SystemHotelManagement.View
                 c.Click += (_, __) => ClickAny();
 
             return panel;
+        }
+        private void HandleRoomCardClick(RoomCardModel m)
+        {
+            // Empty/Clean => Booking popup
+            if (m.State == RoomState.Empty || m.State == RoomState.Clean)
+            {
+                using var f = new FrmBookingPopup(roomId: m.RoomId, roomCode: m.RoomCode); // roomId bạn cần bổ sung vào model
+                if (f.ShowDialog(this) == DialogResult.OK)
+                {
+                    // TODO: insert booking + update status bằng EF
+                    if (f.GoToPaymentAfterBooking)
+                    {
+                        using var pay = new FrmPaymentCheckoutPopup(roomId: m.RoomId, roomCode: m.RoomCode);
+                        pay.ShowDialog(this);
+                    }
+                    SeedDemoData();
+                    ApplyFilterAndRender();
+                }
+                return;
+            }
+
+            // Using => Payment/Checkout popup
+            if (m.State == RoomState.Using)
+            {
+                using var pay = new FrmPaymentCheckoutPopup(roomId: m.RoomId, roomCode: m.RoomCode);
+                pay.ShowDialog(this);
+                SeedDemoData();
+                ApplyFilterAndRender();
+                return;
+            }
+
+            MessageBox.Show($"Phòng {m.RoomCode} đang ở trạng thái: {m.State}");
         }
 
         private Color GetRoomColor(RoomState state)
@@ -284,47 +320,69 @@ namespace SystemHotelManagement.View
         private void SeedDemoData()
         {
             _allRooms.Clear();
+            using var context = new SystemHotelManagementContext();
+            var rooms = context.Rooms.Include(r => r.RoomType).ToList();
+            foreach (var ro in rooms) {
+                _allRooms.Add(new RoomCardModel(
+                    ro.RoomId,
+                    ro.RoomCode,
+                    ro.RoomType.Note ?? "",
+                    "",
+                    ro.RoomType.TypeName,
+                    ro.RoomStatus switch
+                    {
+                        0 => RoomState.Empty, // phòng trống
+                        1 => RoomState.Using, // đang ở
+                        2 => RoomState.Dirty, // phòng bẩn
+                        3 => RoomState.ReadyArrive, // chuẩn bị đến
+                        4 => RoomState.Clean, // phòng sạch
+                        5 => RoomState.Reserved, // đã đặt
+                        6 => RoomState.Repair, // đang sửa
+                        _ => RoomState.Empty // default
+                    }
+                ));
+            }
 
             // Demo giống kiểu hiển thị trong ảnh
-            _allRooms.AddRange(new[]
-            {
-                new RoomCardModel("301", "VIP", "", "VIP", RoomState.Clean),
-                new RoomCardModel("302", "TRPL-MV", "", "Deluxe", RoomState.Reserved),
-                new RoomCardModel("303", "TRPL-SV", "", "Deluxe", RoomState.Clean),
-                new RoomCardModel("304", "TWN-MV", "", "Standard", RoomState.Repair),
-                new RoomCardModel("305", "TWN-SV", "", "Standard", RoomState.Clean),
-                new RoomCardModel("306", "TRPL-MV", "", "Deluxe", RoomState.Clean),
-                new RoomCardModel("307", "TRPL-SV", "", "Deluxe", RoomState.Clean),
-                new RoomCardModel("308", "TRPL-MV", "", "Deluxe", RoomState.Clean),
-                new RoomCardModel("309", "TRPL-SV", "", "Deluxe", RoomState.Clean),
-                new RoomCardModel("401", "VIP", "", "VIP", RoomState.Clean),
+            //_allRooms.AddRange(new[]
+            //{
+            //    new RoomCardModel("301", "VIP", "", "VIP", RoomState.Clean),
+            //    new RoomCardModel("302", "TRPL-MV", "", "Deluxe", RoomState.Reserved),
+            //    new RoomCardModel("303", "TRPL-SV", "", "Deluxe", RoomState.Clean),
+            //    new RoomCardModel("304", "TWN-MV", "", "Standard", RoomState.Repair),
+            //    new RoomCardModel("305", "TWN-SV", "", "Standard", RoomState.Clean),
+            //    new RoomCardModel("306", "TRPL-MV", "", "Deluxe", RoomState.Clean),
+            //    new RoomCardModel("307", "TRPL-SV", "", "Deluxe", RoomState.Clean),
+            //    new RoomCardModel("308", "TRPL-MV", "", "Deluxe", RoomState.Clean),
+            //    new RoomCardModel("309", "TRPL-SV", "", "Deluxe", RoomState.Clean),
+            //    new RoomCardModel("401", "VIP", "", "VIP", RoomState.Clean),
 
-                new RoomCardModel("402", "TRPL-MV", "", "Deluxe", RoomState.Clean),
-                new RoomCardModel("403", "TRPL-SV", "", "Deluxe", RoomState.Clean),
-                new RoomCardModel("404", "TWN-MV", "", "Standard", RoomState.Using),
-                new RoomCardModel("405", "TWN-SV", "", "Standard", RoomState.Clean),
-                new RoomCardModel("406", "TRPL-MV", "", "Deluxe", RoomState.Clean),
-                new RoomCardModel("407", "TRPL-SV", "", "Deluxe", RoomState.Clean),
-                new RoomCardModel("408", "TRPL-MV", "", "Deluxe", RoomState.Clean),
-                new RoomCardModel("409", "TRPL-SV", "", "Deluxe", RoomState.Clean),
-                new RoomCardModel("501", "VIP", "", "VIP", RoomState.Clean),
-                new RoomCardModel("502", "TRPL-MV", "", "Deluxe", RoomState.Clean),
+            //    new RoomCardModel("402", "TRPL-MV", "", "Deluxe", RoomState.Clean),
+            //    new RoomCardModel("403", "TRPL-SV", "", "Deluxe", RoomState.Clean),
+            //    new RoomCardModel("404", "TWN-MV", "", "Standard", RoomState.Using),
+            //    new RoomCardModel("405", "TWN-SV", "", "Standard", RoomState.Clean),
+            //    new RoomCardModel("406", "TRPL-MV", "", "Deluxe", RoomState.Clean),
+            //    new RoomCardModel("407", "TRPL-SV", "", "Deluxe", RoomState.Clean),
+            //    new RoomCardModel("408", "TRPL-MV", "", "Deluxe", RoomState.Clean),
+            //    new RoomCardModel("409", "TRPL-SV", "", "Deluxe", RoomState.Clean),
+            //    new RoomCardModel("501", "VIP", "", "VIP", RoomState.Clean),
+            //    new RoomCardModel("502", "TRPL-MV", "", "Deluxe", RoomState.Clean),
 
-                new RoomCardModel("601", "VIP", "", "VIP", RoomState.Clean),
-                new RoomCardModel("602", "TWN-MV", "", "Standard", RoomState.Clean),
-                new RoomCardModel("603", "TWN-SV", "", "Standard", RoomState.Clean),
-                new RoomCardModel("604", "TWN-MV", "", "Standard", RoomState.Clean),
-                new RoomCardModel("605", "TWN-SV", "", "Standard", RoomState.Clean),
-                new RoomCardModel("606", "TWN-MV", "", "Standard", RoomState.Clean),
-                new RoomCardModel("703", "DBL-SV", "", "Deluxe", RoomState.Clean),
-                new RoomCardModel("704", "TRPL-MV", "", "Deluxe", RoomState.Clean),
+            //    new RoomCardModel("601", "VIP", "", "VIP", RoomState.Clean),
+            //    new RoomCardModel("602", "TWN-MV", "", "Standard", RoomState.Clean),
+            //    new RoomCardModel("603", "TWN-SV", "", "Standard", RoomState.Clean),
+            //    new RoomCardModel("604", "TWN-MV", "", "Standard", RoomState.Clean),
+            //    new RoomCardModel("605", "TWN-SV", "", "Standard", RoomState.Clean),
+            //    new RoomCardModel("606", "TWN-MV", "", "Standard", RoomState.Clean),
+            //    new RoomCardModel("703", "DBL-SV", "", "Deluxe", RoomState.Clean),
+            //    new RoomCardModel("704", "TRPL-MV", "", "Deluxe", RoomState.Clean),
 
-                // thêm vài phòng trống/dirty/readyArrive để test filter
-                new RoomCardModel("201", "STD", "", "Standard", RoomState.Empty),
-                new RoomCardModel("202", "STD", "", "Standard", RoomState.Empty),
-                new RoomCardModel("210", "STD", "", "Standard", RoomState.Dirty),
-                new RoomCardModel("220", "DLX", "", "Deluxe", RoomState.ReadyArrive),
-            });
+            //    // thêm vài phòng trống/dirty/readyArrive để test filter
+            //    new RoomCardModel("201", "STD", "", "Standard", RoomState.Empty),
+            //    new RoomCardModel("202", "STD", "", "Standard", RoomState.Empty),
+            //    new RoomCardModel("210", "STD", "", "Standard", RoomState.Dirty),
+            //    new RoomCardModel("220", "DLX", "", "Deluxe", RoomState.ReadyArrive),
+            //});
         }
 
         // ===== Types =====
@@ -353,15 +411,16 @@ namespace SystemHotelManagement.View
 
         private sealed class RoomCardModel
         {
-            public RoomCardModel(string roomCode, string tag1, string tag2, string roomType, RoomState state)
+            public RoomCardModel(int roomId, string roomCode, string tag1, string tag2, string roomType, RoomState state)
             {
+                RoomId = roomId;
                 RoomCode = roomCode;
                 Tag1 = tag1;
                 Tag2 = tag2;
                 RoomType = roomType;
                 State = state;
             }
-
+            public int RoomId { get; set; }
             public string RoomCode { get; }
             public string Tag1 { get; }
             public string Tag2 { get; }

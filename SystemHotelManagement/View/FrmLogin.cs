@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Windows.Forms;
 using System.IO;
+using System.Windows.Forms;
+using SystemHotelManagement.Helper;
 using SystemHotelManagement.Models;
 
 namespace SystemHotelManagement.View
@@ -69,6 +70,7 @@ namespace SystemHotelManagement.View
 
             var user = db.Accounts
                 .FirstOrDefault(a => a.Username == u && a.PasswordHash == p);
+
             if (user == null)
             {
                 MessageBox.Show("Sai tên đăng nhập hoặc mật khẩu.", "Lỗi",
@@ -76,8 +78,12 @@ namespace SystemHotelManagement.View
             }
             else
             {
-                MessageBox.Show("Đăng nhập thành công! (Demo)", "OK",
-                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                var employee = db.Employees.Find(user.EmployeeId);
+                AppSession.SignIn(user.EmployeeId, user.Username, employee.FullName , employee.Role);
+                var dashboard = new FrmDashboard();
+                dashboard.Show();
+
+                this.Hide();
             }
 
         }
