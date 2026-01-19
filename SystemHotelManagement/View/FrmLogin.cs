@@ -67,10 +67,10 @@ namespace SystemHotelManagement.View
 
             var u = txtUsername.Text.Trim();
             var p = txtPassword.Text;
-
             var user = db.Accounts
                 .FirstOrDefault(a => a.Username == u && a.PasswordHash == p);
 
+            // select *  from acccount where (id == 1)
             if (user == null)
             {
                 MessageBox.Show("Sai tên đăng nhập hoặc mật khẩu.", "Lỗi",

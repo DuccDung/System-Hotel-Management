@@ -383,6 +383,7 @@ namespace SystemHotelManagement.View
             _allRooms.Clear();
             using var context = new SystemHotelManagementContext();
             var rooms = context.Rooms.Include(r => r.RoomType).ToList();
+            // select * from room join roomType 
             foreach (var ro in rooms) {
                 _allRooms.Add(new RoomCardModel(
                     ro.RoomId,
